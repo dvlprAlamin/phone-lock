@@ -27,9 +27,9 @@ body {
   border: 1px solid #9eabbc;
   border-radius: 50%;
 }
-.count-item.active {
+/* .count-item.active {
   background: #9eabbc;
-}
+} */
 .phone-container {
   max-width: 300px;
   height: 520px;
@@ -53,7 +53,7 @@ body {
     "g h i"
     ". j .";
 }
-.key0 {
+#key0 {
   grid-area: j;
 }
 .key {
@@ -74,6 +74,7 @@ body {
 .delete-btn {
   text-align: right;
   margin-right: 15px;
+  visibility: hidden;
 }
 .delete-btn button {
   font-size: 15px;

@@ -7,22 +7,17 @@ const deleteBtn = document.getElementById('delete-btn');
 const countItems = document.getElementsByClassName('count-item');
 
 document.getElementById('keys').addEventListener('click', function (e) {
-
     if (e.target.classList.value == 'key') {
         keyCount.value = keyCount.value + e.target.innerText;
-        console.log(keyCount.value, 'clicked');
     }
     for (let i = 0; i < keyCount.value.length; i++) {
-        console.log(countItems[i])
-        countItems[i].classList.add('active')
+        countItems[i].style.background = '#9eabbc'
     }
-
     if (keyCount.value.length == 4) {
         if (keyCount.value == '5555') {
             // console.log('pin matched');
             window.location.href = "index2.html"
         } else {
-
             // console.log('pin doesn\'t match');
             phone.classList.add('shake-phone');
             setTimeout(() => {
@@ -30,9 +25,8 @@ document.getElementById('keys').addEventListener('click', function (e) {
                 clearInterval(interval)
             }, 1000);
             const interval = setInterval(() => {
-                for (let i = 0; i <= 3; i++) {
-                    console.log(countItems[i])
-                    countItems[i].classList.remove('active')
+                for (let i = 0; i < 4; i++) {
+                    countItems[i].style.background = 'transparent'
                 }
             }, 900);
             tryLeft.parentNode.classList.remove('d-none');
@@ -46,21 +40,30 @@ document.getElementById('keys').addEventListener('click', function (e) {
     } else {
         deleteBtn.style.visibility = 'hidden'
     }
-
 })
 
 
 
 
 deleteBtn.addEventListener('click', function () {
-    keyCount.value = keyCount.value.slice(0, -1)
+    keyCount.value = keyCount.value.slice(0, -1);
+    for (let i = keyCount.value.length; i < 4; i++) {
+        countItems[i].style.background = 'transparent'
+    }
 })
 
 const callAction = () => {
     if (tryLeft.innerText === '0') {
+        const keys = document.getElementsByClassName('key')
+        for (const key of keys) {
+            key.setAttribute('disabled', true)
+        }
         message.classList.add('d-none')
         waitingTime.parentNode.classList.remove('d-none')
         setTimeout(() => {
+            for (const key of keys) {
+                key.removeAttribute('disabled')
+            }
             tryLeft.innerText = 5;
             clearInterval(interval);
             waitingTime.innerText = 10;
